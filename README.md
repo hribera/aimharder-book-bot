@@ -1,1 +1,3 @@
-# aimharder-book-bot
+# AimHarder book bot :robot:
+
+This is a bot to book classes on the AimHarder platform automatically.
