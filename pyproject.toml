@@ -1,0 +1,60 @@
+[tool.poetry]
+authors = ["Helena Ribera <heleribera@gmail.com>"]
+description = "Automatize the booking of classes through AimHarder platform"
+name = "aimharder-book-bot"
+version = "0.1.0"
+readme = "README.md"
+repository = "https://github.com/hribera/aimharder-book-bot"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+pandas = "^2.1.1"
+setuptools = "^74.1.2"
+selenium = "^4.24.0"
+bs4 = "^0.0.2"
+python-dotenv = "^1.0.1"
+rich = "^13.8.0"
+typer = "^0.12.5"
+pydantic = "^2.9.0"
+
+[tool.ruff]
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "D",  # pydocstyle
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "C901",  # function is too complex
+    "D206",  # indent with spaces, not recommended with formatter
+    "W191",  # tab-indentation, not recommended with formatter
+    "D203",  # no-blank-line-before-class
+    "D213",  # multi-line-summary-second-line
+]
+
+[tool.ruff.lint.per-file-ignores]
+"aimharder_book_bot/cli.py" = ["B008"]
+
+[tool.ruff.lint.isort]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+plugins = []
+strict_optional = true
+ignore_missing_imports = false
+
+[tool.poetry.scripts]
+gym-purchases = "gym_purchases.cli:app"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
