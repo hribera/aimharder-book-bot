@@ -16,7 +16,7 @@ load_dotenv()
 SCHEDULE_URL = os.getenv("SCHEDULE_URL")
 
 
-def run_bot(user: str = "helena"):
+def run_bot(user: str):
     """Main execution function."""
     TARGETS = get_classes_to_book(user=user)
     driver = get_driver()

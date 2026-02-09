@@ -1,5 +1,7 @@
 """Booking Bot Command Line Interface."""
 
+from typing import Annotated
+
 from rich.console import Console
 from typer import Option, Typer
 
@@ -18,9 +20,11 @@ def main_callback(version: bool = Option(False, help="Show the package version."
 
 
 @app.command()
-def run():
+def run(
+    user: Annotated[str, Option("--user", help="Name of the user to book the classes")],
+):
     """Run the booking bot."""
-    run_bot()
+    run_bot(user=user)
 
 
 if __name__ == "__main__":
