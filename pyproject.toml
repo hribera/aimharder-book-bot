@@ -17,6 +17,8 @@ rich = ">=14.1.0,<15"
 typer = ">=0.20.0,<0.22"
 pydantic = "^2.9.0"
 loguru = "^0.7.3"
+pyyaml = "^6.0.3"
+types-pyyaml = "^6.0.12.20250915"
 
 [tool.ruff]
 
