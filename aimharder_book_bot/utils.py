@@ -13,28 +13,25 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select, WebDriverWait
 
+config = yaml.safe_load(open("aimharder_book_bot/config.yml"))
+
 load_dotenv()
-EMAIL = os.getenv("EMAIL")
-PASSWORD = os.getenv("PASSWORD")
 SCHEDULE_URL = os.getenv("SCHEDULE_URL")
 
 
 def get_classes_to_book(user: str):
     """Reads the config file and returns a list of classes to book for a given user."""
-    config = yaml.safe_load(open("aimharder_book_bot/config.yml"))
-
     TARGETS = []
-    if user == "helena":
-        for activity_name, activity in config["users"][user].items():
-            for session in activity["sessions"]:
-                TARGETS.append(
-                    {
-                        "name": activity_name.replace("_", " ").title(),
-                        "id": str(activity["id"]),
-                        "time": session["time"],
-                        "days_ahead": session["days_ahead"],
-                    }
-                )
+    for activity_name, activity in config["users"][user]["classes"].items():
+        for session in activity["sessions"]:
+            TARGETS.append(
+                {
+                    "name": activity_name.replace("_", " ").title(),
+                    "id": str(activity["id"]),
+                    "time": session["time"],
+                    "days_ahead": session["days_ahead"],
+                }
+            )
     return TARGETS
 
 
@@ -47,8 +44,11 @@ def get_driver():
     return webdriver.Chrome(options=options)
 
 
-def login(driver):
+def login(driver, user: str):
     """Handles the login process."""
+    EMAIL = os.getenv(config["users"][user]["credentials"]["email"])
+    PASSWORD = os.getenv(config["users"][user]["credentials"]["password"])
+
     logger.info("Logging in...")
     driver.get("https://aimharder.com/login")
 

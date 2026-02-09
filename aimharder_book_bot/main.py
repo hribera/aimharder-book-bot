@@ -21,7 +21,7 @@ def run_bot(user: str):
     TARGETS = get_classes_to_book(user=user)
     driver = get_driver()
     try:
-        login(driver=driver)
+        login(driver=driver, user=user)
         driver.get(SCHEDULE_URL)
 
         for target in TARGETS:
