@@ -2,7 +2,7 @@
 
 **Author:** Helena Ribera <heleribera@gmail.com>
 <br/>
-**Website:** [hriberaponsa.com](www.hriberaponsa.com)
+**Website:** [hriberaponsa.com](http://www.hriberaponsa.com)
 
 [![Lint](https://github.com/hribera/aimharder-book-bot/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/hribera/aimharder-book-bot/actions/workflows/lint.yml?query=branch%3Amain)
 
