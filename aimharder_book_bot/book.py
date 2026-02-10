@@ -1,3 +1,8 @@
+#
+# AimHarder Booking Bot
+# Author: Helena Ribera <heleribera@gmail.com>
+# Website: https://hriberaponsa.com
+#
 """Core booking logic for the AimHarder booking bot."""
 
 import time

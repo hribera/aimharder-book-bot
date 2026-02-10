@@ -1,4 +1,9 @@
-"""Main execution file for the AimHarder Book Bot."""
+#
+# AimHarder Booking Bot
+# Author: Helena Ribera <heleribera@gmail.com>
+# Website: https://hriberaponsa.com
+#
+"""Main execution file for the AimHarder Booking Bot."""
 
 import os
 

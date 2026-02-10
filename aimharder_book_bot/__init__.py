@@ -1,4 +1,9 @@
-"""Dbt2Pdf."""
+#
+# AimHarder Booking Bot
+# Author: Helena Ribera <heleribera@gmail.com>
+# Website: https://hriberaponsa.com
+#
+"""AimHarder Booking Bot."""
 
 from importlib.metadata import PackageNotFoundError, version
 

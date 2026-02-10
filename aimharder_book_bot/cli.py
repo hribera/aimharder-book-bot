@@ -1,4 +1,9 @@
-"""Booking Bot Command Line Interface."""
+#
+# AimHarder Booking Bot
+# Author: Helena Ribera <heleribera@gmail.com>
+# Website: https://hriberaponsa.com
+#
+"""AimHarder Booking Bot CLI."""
 
 from typing import Annotated
 

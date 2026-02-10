@@ -1,3 +1,8 @@
+#
+# AimHarder Booking Bot
+# Author: Helena Ribera <heleribera@gmail.com>
+# Website: https://hriberaponsa.com
+#
 """Utility functions for the aimharder_book_bot."""
 
 import os
