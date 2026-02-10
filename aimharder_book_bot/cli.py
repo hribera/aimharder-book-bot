@@ -19,9 +19,9 @@ console = Console(tab_size=4)
 
 @app.callback(invoke_without_command=True, no_args_is_help=True)
 def main_callback(version: bool = Option(False, help="Show the package version.")):
-    """Dbt2Pdf command line interface."""
+    """AimHarder Booking Bot command line interface."""
     if version:
-        console.print(f"dbt2pdf, version {__version__}")
+        console.print(f"AimHarder Booking Bot, version {__version__}")
 
 
 @app.command()
