@@ -1,4 +1,4 @@
-# AimHarder book bot :robot:
+# AimHarder Booking Bot :robot:
 
 **Author:** Helena Ribera <heleribera@gmail.com>
 <br/>
