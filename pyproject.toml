@@ -21,6 +21,16 @@ pyyaml = "^6.0.3"
 types-pyyaml = "^6.0.12.20250915"
 licenseheaders = "^0.8.8"
 
+[tool.poetry.group.dev.dependencies]
+pre-commit = "3.8.0"
+
+[tool.poetry.group.ci.dependencies]
+setuptools = "^74.1.0"
+pybadges = "^3.0.1"
+
+[tool.poetry.group.lint.dependencies]
+ruff = "0.6.3"
+
 [tool.ruff]
 
 [tool.ruff.lint]
