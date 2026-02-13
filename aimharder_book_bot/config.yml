@@ -22,3 +22,27 @@ users:
         sessions:
           - time: "17:00 - 18:00"
             days_ahead: [4]
+  laura:
+    credentials:
+      email: "EMAIL_LAURA"
+      password: "PASSWORD_LAURA"
+    classes:
+      hyrox:
+        id: 25375
+        sessions:
+          - time: "17:00 - 18:00"
+            days_ahead: [1, 2]
+          - time: "18:00 - 19:00"
+            days_ahead: [4]
+      strength_conditioning:
+        id: 27780
+        sessions:
+          - time: "17:00 - 18:00"
+            days_ahead: [2]
+          - time: "19:00 - 20:00"
+            days_ahead: [4]
+      wod:
+        id: 24743
+        sessions:
+          - time: "16:00 - 17:00"
+            days_ahead: [1]
