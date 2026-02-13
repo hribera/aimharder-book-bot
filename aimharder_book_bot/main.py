@@ -6,7 +6,7 @@
 """Main execution file for the AimHarder Booking Bot."""
 
 import os
-from datetime import datetime
+from datetime import datetime, time
 
 from dotenv import load_dotenv
 
@@ -20,7 +20,9 @@ from aimharder_book_bot.utils import (
 
 load_dotenv()
 SCHEDULE_URL = os.getenv("SCHEDULE_URL")
-TARGET_HOUR = 9
+TARGET_HOUR = 18
+TARGET_MINUTE = 0
+TARGET_TIME = time(TARGET_HOUR, TARGET_MINUTE)
 
 
 def run_bot(user: str):
@@ -31,7 +33,7 @@ def run_bot(user: str):
         login(driver=driver, user=user)
         driver.get(SCHEDULE_URL)
 
-        while datetime.now().hour < TARGET_HOUR:
+        while datetime.now().time() < TARGET_TIME:
             continue
 
         for target in TARGETS:
