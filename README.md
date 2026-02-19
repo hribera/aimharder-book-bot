@@ -32,6 +32,16 @@ Ensure you have Python 3.11 and Poetry installed on your machine.
     poetry --version
     ```
 
+- Create `.env` file:
+
+    In the root directory of the project create a `.env` file and add the following environment variables:
+
+    ```env
+    EMAIL_<YOUR_NAME>=<your-email>
+    PASSWORD_<YOUR_NAME>=<your-password>
+    SCHEDULE_URL=https://<your-club-name>.aimharder.com/schedule
+    ```
+
 ### Installation
 
 1. Clone the repository:
