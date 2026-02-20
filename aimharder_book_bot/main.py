@@ -5,8 +5,8 @@
 #
 """Main execution file for the AimHarder Booking Bot."""
 
-import os
 import concurrent.futures
+import os
 from datetime import datetime, time
 
 from dotenv import load_dotenv
