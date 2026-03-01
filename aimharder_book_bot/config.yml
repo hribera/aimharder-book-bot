@@ -25,15 +25,15 @@ users:
         id: 25375
         sessions:
           - time: "17:00 - 18:00"
-            days_ahead: [1]
+            days_ahead: [1, 3, 4]
           - time: "18:00 - 19:00"
-            days_ahead: [2, 4]
+            days_ahead: [2]
       strength_&_conditioning:
         id: 27780
         sessions:
           - time: "17:00 - 18:00"
             days_ahead: [2]
-          - time: "19:00 - 20:00"
+          - time: "18:00 - 19:00"
             days_ahead: [4]
       wod:
         id: 24743
