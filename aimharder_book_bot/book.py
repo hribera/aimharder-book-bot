@@ -20,6 +20,50 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+def _verify_booking(driver, target_name, target_time):
+    """Re-scan the schedule to confirm the class block now shows 'Cancelar' (booked)."""
+    time.sleep(2)
+    try:
+        wait = WebDriverWait(driver, 10)
+        blocks = wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "div.bloqueClase"))
+        )
+        for block in blocks:
+            try:
+                name_text = block.find_element(
+                    By.CSS_SELECTOR, "span.rvNombreCl"
+                ).text.strip()
+                time_text = block.find_element(
+                    By.CSS_SELECTOR, "span.rvHora"
+                ).text.strip()
+            except NoSuchElementException:
+                continue
+
+            if (target_name.lower() in name_text.lower()) and (
+                time_text == target_time
+            ):
+                try:
+                    block.find_element(
+                        By.XPATH, ".//a[contains(text(), 'Cancel·lar reserva')]"
+                    )
+                    logger.info(
+                        f"VERIFIED: {target_name} at {target_time} is confirmed booked."
+                    )
+                    return True
+                except NoSuchElementException:
+                    logger.warning(
+                        f"VERIFICATION FAILED: {target_name} at {target_time} does not show as booked."
+                    )
+                    return False
+        logger.warning(
+            f"VERIFICATION FAILED: Could not find {target_name} at {target_time} during verification scan."
+        )
+        return False
+    except Exception as e:
+        logger.error(f"Error during booking verification: {e}")
+        return False
+
+
 def book_class(driver, target, days_ahead):
     """Logic to find and book a specific class."""
     target_name = target["name"]
@@ -97,22 +141,22 @@ def book_class(driver, target, days_ahead):
                         except TimeoutException:
                             logger.info("No confirmation needed or missed.")
 
-                        found = True
+                        found = _verify_booking(driver, target_name, target_time)
                         break
 
                     except NoSuchElementException:
-                        if "Cancelar" in block.text:
-                            print("Status: Already Booked.")
+                        try:
+                            block.find_element(
+                                By.XPATH, ".//a[contains(text(), 'Cancel·lar reserva')]"
+                            )
+                            logger.info("Status: Already Booked.")
                             found = True
-                        elif "Lista de Espera" in block.text:
-                            print("Status: Waitlist Only.")
-                            found = True
-                        else:
-                            print("Status: Button not found (Full?).")
+                        except NoSuchElementException:
+                            pass
                     break
 
             if not found:
-                logger.warning(f"Target not found. Retrying scan... ({attempts + 1}/3)")
+                logger.warning(f"Retrying booking... ({attempts + 1}/3)")
                 time.sleep(1)
                 attempts += 1
             else:
