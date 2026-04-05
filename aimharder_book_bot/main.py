@@ -10,7 +10,6 @@ import os
 from datetime import datetime, time
 
 from dotenv import load_dotenv
-from loguru import logger
 
 from aimharder_book_bot.book import book_class
 from aimharder_book_bot.utils import (
@@ -35,7 +34,6 @@ def run_single_bot(user: str, target: dict):
         driver.get(SCHEDULE_URL)
 
         # Wait until the precise booking window opens
-        logger.info("THE AUTOMATIC UPDATE OF JOBS VIA GITHUB ACTIONS WORKS!")
         while datetime.now().time() < TARGET_TIME:
             continue
 
