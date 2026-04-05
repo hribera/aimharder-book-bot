@@ -1,4 +1,4 @@
-name: Build and Push to Artifact Registry
+name: Build and Deploy
 
 on:
   push:
@@ -40,3 +40,9 @@ jobs:
         run: |
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:latest
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
+
+      - name: Update Cloud Run Job image
+        run: |
+          gcloud run jobs update ${{ env.IMAGE }} \
+            --image ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            --region ${{ env.REGION }}
