@@ -41,8 +41,15 @@ jobs:
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:latest
           docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }}
 
-      - name: Update Cloud Run Job image
+      - name: Get image digest
+        id: digest
         run: |
-          gcloud run jobs update ${{ env.IMAGE }} \
-            --image ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} \
-            --region ${{ env.REGION }}
+          DIGEST=$(gcloud artifacts docker images describe \
+            ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }} \
+            --format='get(image_summary.digest)')
+          echo "digest=$DIGEST" >> $GITHUB_OUTPUT
+
+      - name: Update Cloud Run Jobs
+        run: |
+          IMAGE_URI=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}@${{ steps.digest.outputs.digest }}
+          gcloud run jobs update aimharder-book-bot --image $IMAGE_URI --region ${{ env.REGION }}
