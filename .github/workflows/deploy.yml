@@ -53,3 +53,4 @@ jobs:
         run: |
           IMAGE_URI=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}@${{ steps.digest.outputs.digest }}
           gcloud run jobs update aimharder-book-bot --image $IMAGE_URI --region ${{ env.REGION }}
+          gcloud run jobs update aimharder-book-bot-laura --image $IMAGE_URI --region ${{ env.REGION }}
