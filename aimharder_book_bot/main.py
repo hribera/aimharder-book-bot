@@ -23,7 +23,7 @@ from aimharder_book_bot.utils import (
 load_dotenv()
 SCHEDULE_URL = os.getenv("SCHEDULE_URL")
 TARGET_HOUR = 17
-TARGET_MINUTE = 10
+TARGET_MINUTE = 35
 TARGET_TIME = time(TARGET_HOUR, TARGET_MINUTE)
 
 
