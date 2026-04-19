@@ -43,7 +43,7 @@ def get_classes_to_book(user: str):
 def get_driver():
     """Initializes the Chrome driver with options."""
     options = Options()
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
     options.add_argument("--no-sandbox")
 
     return webdriver.Chrome(options=options)
@@ -70,10 +70,27 @@ def login(driver, user: str):
 
     wait = WebDriverWait(driver, 10)
     try:
-        wait.until(EC.element_to_be_clickable((By.ID, "mail"))).send_keys(EMAIL)
-        wait.until(EC.element_to_be_clickable((By.ID, "pw"))).send_keys(PASSWORD)
-        wait.until(EC.element_to_be_clickable((By.ID, "loginSubmit"))).click()
-        wait.until(EC.url_changes("https://aimharder.com/login"))
+        # Wait for React to render inputs
+        email_input = wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
+        )
+
+        password_input = wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='password']"))
+        )
+
+        # Fill inputs
+        email_input.click()
+        email_input.clear()
+        email_input.send_keys(EMAIL)
+
+        password_input.click()
+        password_input.clear()
+        password_input.send_keys(PASSWORD)
+
+        # Click login button
+        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button")))
+        login_button.click()
         logger.info("Login successful.")
     except TimeoutException:
         logger.error("Login failed or timed out.")

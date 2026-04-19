@@ -15,7 +15,6 @@ from selenium.common.exceptions import (
     TimeoutException,
 )
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -76,13 +75,11 @@ def book_class(driver, target, days_ahead):
 
     wait = WebDriverWait(driver, 10)
 
-    # 1. Set the Date
+    # 1. Set the Date via the site's weekSelDay() JS function
     try:
-        date_input = wait.until(EC.element_to_be_clickable((By.ID, "selw")))
-        date_input.clear()
-        date_input.send_keys(formatted_date)
-        date_input.send_keys(Keys.ENTER)
-        time.sleep(1)
+        js_date = booking_date.strftime("%Y%m%d")
+        driver.execute_script(f"weekSelDay('{js_date}');")
+        time.sleep(2)  # Wait for AJAX to load the new day's classes
     except Exception as e:
         logger.error(f"Error setting date: {e}")
         return
