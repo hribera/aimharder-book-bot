@@ -8,7 +8,7 @@
 import concurrent.futures
 import os
 import time as time_sleep
-from datetime import time
+from datetime import datetime, time
 
 from dotenv import load_dotenv
 
@@ -36,9 +36,9 @@ def run_single_bot(user: str, target: dict):
         time_sleep.sleep(15)
         driver.get(SCHEDULE_URL)
 
-        # # Wait until the precise booking window opens
-        # while datetime.now().time() < TARGET_TIME:
-        #     continue
+        # Wait until the precise booking window opens
+        while datetime.now().time() < TARGET_TIME:
+            continue
 
         # Each bot now handles one specific class ID
         switch_filter(driver=driver, class_id=target["id"])
