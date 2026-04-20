@@ -43,7 +43,7 @@ def get_classes_to_book(user: str):
 def get_driver():
     """Initializes the Chrome driver with options."""
     options = Options()
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
 
     return webdriver.Chrome(options=options)
@@ -89,8 +89,13 @@ def login(driver, user: str):
         password_input.send_keys(PASSWORD)
 
         # Click login button
-        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button")))
+        login_button = wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//button[contains(text(), 'Log in')]")
+            )
+        )
         login_button.click()
+
         logger.info("Login successful.")
     except TimeoutException:
         logger.error("Login failed or timed out.")
